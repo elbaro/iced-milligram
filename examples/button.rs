@@ -6,9 +6,8 @@ struct App {
     button2: iced::button::State,
     button3: iced::button::State,
     button4: iced::button::State,
-    button5: iced::button::State,
-    button6: iced::button::State,
-    text_input: iced::text_input::State,
+    text_input1: iced::text_input::State,
+    text_input2: iced::text_input::State,
     text_value: String,
 }
 
@@ -67,19 +66,27 @@ impl iced::Sandbox for App {
             .push(iced_milligram_theme::widget::unordered_list(&[
                 "Apple", "Banana", "Orange",
             ]))
-            .push(
-                iced_milligram_theme::widget::text_input::<Self::Message, _>(
-                    &mut self.text_input,
+            .push(iced_milligram_theme::widget::paragraph(
+                iced_milligram_theme::widget::labeled_text_input::<Self::Message, _>(
+                    "Label",
+                    &mut self.text_input1,
                     "placeholder",
                     &self.text_value,
                     |s| Message::TextChanged(s),
                 ),
-            )
-            .push(iced_milligram_theme::widget::paragraph_text(
-                "A read-only text-only table.",
             ))
+            .push(iced_milligram_theme::widget::paragraph(
+                iced_milligram_theme::widget::text_input::<Self::Message, _>(
+                    &mut self.text_input2,
+                    "TextInput without label",
+                    &self.text_value,
+                    |s| Message::TextChanged(s),
+                ),
+            ))
+            .push(iced_milligram_theme::widget::h1("Table (text-only)"))
             .push(iced_milligram_theme::widget::text_table(
                 &["Name", "Age", "Height"],
+                &[100, 100, 100],
                 vec![
                     &["Stephen Curry", "27", "1,91", "Akron, OH"],
                     &["Klay Thompson", "25", "2,01", "	Los Angeles, CA"],

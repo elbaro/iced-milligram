@@ -7,7 +7,7 @@ where
     let mut col = iced::Column::new();
     for s in iter.into_iter() {
         let s = s.as_ref();
-        col = col.push(crate::widget::text(s));
+        col = col.push(crate::widget::text(&("- ".to_string() + s)));
         col = col.push(iced::Space::with_height(iced::Length::Units(25)));
     }
 

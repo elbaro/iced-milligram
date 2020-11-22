@@ -49,3 +49,20 @@ where
         .size(16)
         .style(TextInputStyle)
 }
+
+pub fn labeled_text_input<'a, Message: 'a + Clone, F>(
+    label: &'a str,
+    state: &'a mut iced::text_input::State,
+    placeholder: &'a str,
+    value: &'a str,
+    on_change: F,
+) -> iced::Column<'a, Message>
+where
+    F: 'static + Fn(String) -> Message,
+{
+    let input: iced::Element<_> = text_input(state, placeholder, value, on_change).into();
+    iced::Column::new()
+        .spacing(5)
+        .push(crate::widget::bold_text(label))
+        .push(input)
+}

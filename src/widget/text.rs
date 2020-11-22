@@ -4,11 +4,19 @@ pub fn text(label: &str) -> iced::Text {
     iced::Text::new(label)
         .color(crate::style::DARK_GREY)
         .size(16)
+        .font(crate::style::ROBOTO_LIGHT)
+}
+
+pub fn bold_text(label: &str) -> iced::Text {
+    iced::Text::new(label)
+        .color(crate::style::DARK_GREY)
+        .size(16)
+        .font(crate::style::ROBOTO_BOLD)
 }
 
 pub fn paragraph_text<'a, Message: 'a>(txt: &str) -> iced::Column<'a, Message> {
     iced::Column::new()
-        .push(iced::Text::new(txt).color(crate::style::DARK_GREY).size(16))
+        .push(text(txt))
         .push(iced::Space::with_height(iced::Length::Units(25)))
 }
 
