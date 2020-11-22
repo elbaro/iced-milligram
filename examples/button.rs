@@ -9,11 +9,13 @@ struct App {
     button5: iced::button::State,
     button6: iced::button::State,
     text_input: iced::text_input::State,
+    text_value: String,
 }
 
 #[derive(Clone, Debug)]
 enum Message {
     ButtonPressed,
+    TextChanged(String),
 }
 
 impl iced::Sandbox for App {
@@ -24,12 +26,19 @@ impl iced::Sandbox for App {
     fn title(&self) -> String {
         "Example: Button".to_string()
     }
-    fn update(&mut self, _message: Self::Message) {}
+    fn update(&mut self, message: Self::Message) {
+        match message {
+            Message::TextChanged(text) => {
+                self.text_value = text;
+            }
+            _ => {}
+        }
+    }
     fn view(&mut self) -> iced::Element<Self::Message> {
         let col = iced::Column::new()
             .push(iced_milligram_theme::widget::h1("Getting Started"))
             .push(iced_milligram_theme::widget::paragraph_text(
-                "This is a port of ",
+                "This is iced-milligram-theme.",
             ))
             .push(iced_milligram_theme::widget::h1("Buttons"))
             .push(iced_milligram_theme::widget::paragraph(
@@ -62,10 +71,24 @@ impl iced::Sandbox for App {
                 iced_milligram_theme::widget::text_input::<Self::Message, _>(
                     &mut self.text_input,
                     "placeholder",
-                    "value",
-                    |_s| Message::ButtonPressed,
+                    &self.text_value,
+                    |s| Message::TextChanged(s),
                 ),
-            );
+            )
+            .push(iced_milligram_theme::widget::paragraph_text(
+                "A read-only text-only table.",
+            ))
+            .push(iced_milligram_theme::widget::text_table(
+                &["Name", "Age", "Height"],
+                vec![
+                    &["Stephen Curry", "27", "1,91", "Akron, OH"],
+                    &["Klay Thompson", "25", "2,01", "	Los Angeles, CA"],
+                ],
+                // &[
+                //     &["Stephen Curry", "27", "1,91", "Akron, OH"],
+                //     &["Klay Thompson", "25", "2,01", "	Los Angeles, CA"],
+                // ],
+            ));
 
         iced::Container::new(iced::Container::new(col).width(iced::Length::Units(800)))
             .width(iced::Length::Fill)
@@ -80,6 +103,11 @@ fn main() {
 
     App::run(Settings {
         // default_font: Some(iced_milligram_theme::style::robot()),
+        window: iced::window::Settings {
+            size: (1200, 1200),
+            resizable: true,
+            decorations: true,
+        },
         ..Default::default()
     })
 }

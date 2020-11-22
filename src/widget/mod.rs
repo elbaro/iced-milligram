@@ -12,3 +12,6 @@ pub use list::*;
 
 pub mod form;
 pub use form::*;
+
+pub mod table;
+pub use table::*;
