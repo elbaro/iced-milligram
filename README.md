@@ -29,3 +29,6 @@ use iced_milligram::widget as milligram;
 let button = milligram::large_outlined_button(&mut state, "Button Label").on_press(..);
 let text_input = milligram::text_input(..);
 ```
+
+## License
+- [Roboto Font](LICENSE_ROBOTO)
