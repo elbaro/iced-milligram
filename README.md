@@ -3,7 +3,7 @@ A port of a css framework [milligram](https://milligram.io/) to [iced](https://i
 
 ```sh
 [dependencies]
-iced-milligram = "*"
+iced-milligram = { git = "https://github.com/elbaro/iced-milligram" }
 ```
 
 ```rust
