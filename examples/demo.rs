@@ -112,9 +112,15 @@ fn main() {
         // default_font: Some(iced_milligram::style::robot()),
         window: iced::window::Settings {
             size: (1200, 1200),
+            min_size: None,
+            max_size: None,
             resizable: true,
             decorations: true,
+            transparent: false,
+            always_on_top: false,
+            icon: None,
         },
         ..Default::default()
     })
+    .unwrap();
 }

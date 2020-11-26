@@ -9,8 +9,8 @@ impl iced::text_input::StyleSheet for TextInputStyle {
     fn active(&self) -> iced::text_input::Style {
         iced::widget::text_input::Style {
             border_color: ACTIVE_BORDER_COLOR,
-            border_width: 1,
-            border_radius: 4,
+            border_width: 1.0,
+            border_radius: 4.0,
             ..Default::default()
         }
     }
@@ -18,8 +18,8 @@ impl iced::text_input::StyleSheet for TextInputStyle {
     fn focused(&self) -> iced::text_input::Style {
         iced::widget::text_input::Style {
             border_color: crate::style::color::PURPLE,
-            border_width: 1,
-            border_radius: 4,
+            border_width: 1.0,
+            border_radius: 4.0,
             ..Default::default()
         }
     }
@@ -35,7 +35,7 @@ impl iced::text_input::StyleSheet for TextInputStyle {
     }
 }
 
-pub fn text_input<'a, Message, F>(
+pub fn text_input<'a, Message: Clone, F>(
     state: &'a mut iced::text_input::State,
     placeholder: &'a str,
     value: &'a str,
@@ -65,4 +65,32 @@ where
         .spacing(5)
         .push(crate::widget::bold_text(label))
         .push(input)
+}
+
+// pub fn radio() {
+
+// }
+
+pub fn radio<F, V, Message: Clone>(
+    value: V,
+    label: impl Into<String>,
+    selected: Option<V>,
+    f: F,
+) -> iced::widget::Radio<Message>
+where
+    V: Eq + Copy,
+    F: 'static + Fn(V) -> Message,
+{
+    iced::widget::Radio::new(value, label, selected, f).style(crate::style::form::RadioStyle)
+}
+
+pub fn checkbox<F, Message>(
+    is_checked: bool,
+    label: impl Into<String>,
+    f: F,
+) -> iced::Checkbox<Message>
+where
+    F: 'static + Fn(bool) -> Message,
+{
+    iced::widget::Checkbox::new(is_checked, label, f)
 }

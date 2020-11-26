@@ -10,7 +10,7 @@ pub const BUTTON_TEXT_SIZE: u16 = 16;
 
 use crate::style::button::*;
 
-pub fn create_button<'a, Message>(
+pub fn create_button<'a, Message: Clone>(
     state: &'a mut iced::button::State,
     label: &str,
     text_color: iced::Color,
@@ -34,14 +34,14 @@ pub fn create_button<'a, Message>(
     button
 }
 
-pub fn button<'a, Message>(
+pub fn button<'a, Message: Clone>(
     state: &'a mut iced::button::State,
     label: &str,
 ) -> iced::Button<'a, Message> {
     create_button(state, label, iced::Color::WHITE, ButtonStyle::Default, 1.0)
 }
 
-pub fn outlined_button<'a, Message>(
+pub fn outlined_button<'a, Message: Clone>(
     state: &'a mut iced::button::State,
     label: &str,
 ) -> iced::Button<'a, Message> {
@@ -54,21 +54,21 @@ pub fn outlined_button<'a, Message>(
     )
 }
 
-pub fn clear_button<'a, Message>(
+pub fn clear_button<'a, Message: Clone>(
     state: &'a mut iced::button::State,
     label: &str,
 ) -> iced::Button<'a, Message> {
     create_button(state, label, crate::style::PURPLE, ButtonStyle::Clear, 1.0)
 }
 
-pub fn large_button<'a, Message>(
+pub fn large_button<'a, Message: Clone>(
     state: &'a mut iced::button::State,
     label: &str,
 ) -> iced::Button<'a, Message> {
     create_button(state, label, iced::Color::WHITE, ButtonStyle::Default, 2.0)
 }
 
-pub fn large_outlined_button<'a, Message>(
+pub fn large_outlined_button<'a, Message: Clone>(
     state: &'a mut iced::button::State,
     label: &str,
 ) -> iced::Button<'a, Message> {
@@ -81,21 +81,21 @@ pub fn large_outlined_button<'a, Message>(
     )
 }
 
-pub fn large_clear_button<'a, Message>(
+pub fn large_clear_button<'a, Message: Clone>(
     state: &'a mut iced::button::State,
     label: &str,
 ) -> iced::Button<'a, Message> {
     create_button(state, label, crate::style::PURPLE, ButtonStyle::Clear, 2.0)
 }
 
-pub fn small_button<'a, Message>(
+pub fn small_button<'a, Message: Clone>(
     state: &'a mut iced::button::State,
     label: &str,
 ) -> iced::Button<'a, Message> {
     create_button(state, label, iced::Color::WHITE, ButtonStyle::Default, 0.5)
 }
 
-pub fn small_outlined_button<'a, Message>(
+pub fn small_outlined_button<'a, Message: Clone>(
     state: &'a mut iced::button::State,
     label: &str,
 ) -> iced::Button<'a, Message> {
@@ -108,7 +108,7 @@ pub fn small_outlined_button<'a, Message>(
     )
 }
 
-pub fn small_clear_button<'a, Message>(
+pub fn small_clear_button<'a, Message: Clone>(
     state: &'a mut iced::button::State,
     label: &str,
 ) -> iced::Button<'a, Message> {
